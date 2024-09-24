@@ -1,0 +1,70 @@
+# Configuração do Ambiente OpenGL 👾
+
+Configuração para iniciar os projetos de computação gráfica com OpenGL!
+
+---
+
+## Passo 1: Baixar e Instalar MSYS2
+
+1. **Baixe o instalador do MSYS2**:
+   - [MSYS2 Installer](https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
+
+2. **Execute o instalador e complete a instalação**.
+
+3. **Abra o terminal MSYS2** (MSYS2 MSYS) pelo menu Iniciar.
+
+---
+
+## Passo 2: Atualizar o Sistema
+
+1. No terminal do MSYS2, execute o comando para atualizar o sistema:
+   ```bash
+   pacman -Syu
+
+## Passo 3: Instalar GCC e GDB
+
+1. Execute o comando:
+   ```bash
+   pacman -S mingw-w64-x86_64-gcc
+   pacman -S mingw-w64-x86_64-gdb
+
+## Passo 4: Configurar Variáveis de Ambiente
+
+1. Abra as Configurações do Sistema e vá para:
+- Sistema > Configurações Avançadas do Sistema > Variáveis de Ambiente
+2. Na seção Variáveis de usuário, selecione a variável Path e clique em Editar.
+3. Adicione um novo caminho:
+   ```bash
+   C:\msys64\mingw64\bin
+
+4. Reinicie o computador.
+
+## Passo 5: Verificar Instalação
+
+1. No terminal MSYS2, teste se o GCC e o GDB estão funcionando:
+   ```bash
+   gcc --version
+   gdb --version
+
+## Passo 6: Instalar Bibliotecas OpenGL
+
+1. No terminal MSYS2, execute os seguintes comandos:
+   ```bash
+   pacman -S mingw-w64-x86_64-freeglut
+   pacman -S mingw-w64-x86_64-glew
+
+### Importante
+1. Abra o arquivo .vscode/tasks.json no seu projeto.
+2. Encontre a propriedade args e adicione os parâmetros:
+   ```bash
+   "args": [
+    "-fdiagnostics-color=always",
+    "-g",
+    "${file}",
+    "-o",
+    "${fileDirname}\\${fileBasenameNoExtension}.exe",
+    "-lfreeglut",
+    "-lopengl32",
+    "-lglu32",
+    "-lglew32"
+]
